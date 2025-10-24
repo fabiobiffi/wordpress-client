@@ -1,0 +1,11 @@
+services:
+  wordpress-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wordpress-client-dev
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    stdin_open: true
+    tty: true

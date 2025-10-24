@@ -65,7 +65,7 @@ Repository = "https://github.com/fabio/wordpress-client.git"
 Changelog = "https://github.com/fabio/wordpress-client/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["."]
+packages = ["src"]
 
 [tool.black]
 line-length = 88
@@ -110,7 +110,7 @@ strict_equality = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "-ra -q --cov=wordpress_client --cov-report=term-missing"
+addopts = "-ra -q --cov=src/wordpress_client --cov-report=term-missing"
 testpaths = [
     "tests",
 ]
@@ -118,9 +118,12 @@ python_files = [
     "test_*.py",
     "*_test.py",
 ]
+pythonpath = [
+    "src"
+]
 
 [tool.coverage.run]
-source = ["wordpress_client"]
+source = ["src/wordpress_client"]
 omit = [
     "*/tests/*",
     "*/test_*",
