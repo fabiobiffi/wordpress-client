@@ -9,9 +9,10 @@ from pydantic import BaseModel, Field
 class Category(BaseModel):
     """
     WordPress Category model.
-    
+
     Represents a WordPress category/taxonomy term.
     """
+
     id: Optional[int] = None
     count: Optional[int] = Field(default=0, description="Number of posts in category")
     description: Optional[str] = Field(default="", description="Category description")
@@ -25,6 +26,7 @@ class Category(BaseModel):
 
 class CategoryCreate(BaseModel):
     """Model for creating a new category."""
+
     name: str = Field(description="Category name")
     description: Optional[str] = Field(default=None, description="Category description")
     slug: Optional[str] = Field(default=None, description="Category slug")
@@ -33,6 +35,7 @@ class CategoryCreate(BaseModel):
 
 class CategoryUpdate(BaseModel):
     """Model for updating an existing category."""
+
     name: Optional[str] = Field(default=None, description="Category name")
     description: Optional[str] = Field(default=None, description="Category description")
     slug: Optional[str] = Field(default=None, description="Category slug")

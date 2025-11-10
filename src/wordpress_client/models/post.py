@@ -9,18 +9,21 @@ from pydantic import BaseModel, Field
 
 class PostContent(BaseModel):
     """Post content structure."""
+
     rendered: Optional[str] = None
     raw: Optional[str] = None
 
 
 class PostTitle(BaseModel):
     """Post title structure."""
+
     rendered: Optional[str] = None
     raw: Optional[str] = None
 
 
 class PostExcerpt(BaseModel):
     """Post excerpt structure."""
+
     rendered: Optional[str] = None
     raw: Optional[str] = None
 
@@ -28,9 +31,10 @@ class PostExcerpt(BaseModel):
 class Post(BaseModel):
     """
     WordPress Post model.
-    
+
     Represents a WordPress post with all its properties.
     """
+
     id: Optional[int] = None
     date: Optional[datetime] = None
     date_gmt: Optional[datetime] = None
@@ -50,21 +54,25 @@ class Post(BaseModel):
     sticky: Optional[bool] = Field(default=False, description="Sticky post")
     template: Optional[str] = Field(default="", description="Template file")
     format: Optional[str] = Field(default="standard", description="Post format")
-    categories: Optional[List[int]] = Field(default_factory=list, description="Category IDs")
+    categories: Optional[List[int]] = Field(
+        default_factory=list, description="Category IDs"
+    )
     tags: Optional[List[int]] = Field(default_factory=list, description="Tag IDs")
-    
+
     class Config:
         """Pydantic configuration."""
-        json_encoders = {
-            datetime: lambda v: v.isoformat() if v else None
-        }
+
+        json_encoders = {datetime: lambda v: v.isoformat() if v else None}
 
 
 class PostCreate(BaseModel):
     """Model for creating a new post."""
+
     title: str = Field(description="Post title")
     content: str = Field(description="Post content (HTML)")
-    status: str = Field(default="draft", description="Post status (draft, publish, private)")
+    status: str = Field(
+        default="draft", description="Post status (draft, publish, private)"
+    )
     excerpt: Optional[str] = Field(default=None, description="Post excerpt")
     categories: Optional[List[int]] = Field(default=None, description="Category IDs")
     tags: Optional[List[int]] = Field(default=None, description="Tag IDs")
@@ -77,6 +85,7 @@ class PostCreate(BaseModel):
 
 class PostUpdate(BaseModel):
     """Model for updating an existing post."""
+
     title: Optional[str] = Field(default=None, description="Post title")
     content: Optional[str] = Field(default=None, description="Post content (HTML)")
     status: Optional[str] = Field(default=None, description="Post status")

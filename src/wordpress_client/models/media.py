@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 class MediaDetails(BaseModel):
     """Media file details."""
+
     width: Optional[int] = None
     height: Optional[int] = None
     file: Optional[str] = None
@@ -18,12 +19,14 @@ class MediaDetails(BaseModel):
 
 class MediaTitle(BaseModel):
     """Media title structure."""
+
     rendered: Optional[str] = None
     raw: Optional[str] = None
 
 
 class MediaCaption(BaseModel):
     """Media caption structure."""
+
     rendered: Optional[str] = None
     raw: Optional[str] = None
 
@@ -31,9 +34,10 @@ class MediaCaption(BaseModel):
 class Media(BaseModel):
     """
     WordPress Media model.
-    
+
     Represents a WordPress media item (image, video, audio, etc.).
     """
+
     id: Optional[int] = None
     date: Optional[datetime] = None
     date_gmt: Optional[datetime] = None
@@ -52,16 +56,16 @@ class Media(BaseModel):
     media_details: Optional[MediaDetails] = None
     post: Optional[int] = Field(default=None, description="Associated post ID")
     source_url: Optional[str] = None
-    
+
     class Config:
         """Pydantic configuration."""
-        json_encoders = {
-            datetime: lambda v: v.isoformat() if v else None
-        }
+
+        json_encoders = {datetime: lambda v: v.isoformat() if v else None}
 
 
 class MediaUpload(BaseModel):
     """Model for uploading media."""
+
     file_path: str = Field(description="Local file path to upload")
     title: Optional[str] = Field(default=None, description="Media title")
     alt_text: Optional[str] = Field(default=None, description="Alternative text")
@@ -72,6 +76,7 @@ class MediaUpload(BaseModel):
 
 class MediaUpdate(BaseModel):
     """Model for updating media metadata."""
+
     title: Optional[str] = Field(default=None, description="Media title")
     alt_text: Optional[str] = Field(default=None, description="Alternative text")
     caption: Optional[str] = Field(default=None, description="Media caption")
